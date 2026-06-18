@@ -1,0 +1,109 @@
+# API version for Deployment resource
+apiVersion: apps/v1
+
+# Kubernetes object type
+kind: Deployment
+
+metadata:
+
+  # Deployment name
+  name: user-service
+
+  # Namespace where deployment will run
+  namespace: apps
+
+  labels:
+    app: user-service
+
+spec:
+
+  # Number of pod instances
+  replicas: 2
+
+  # Rolling update strategy
+  strategy:
+    type: RollingUpdate
+
+    rollingUpdate:
+
+      # Number of old pods that can remain during deployment
+      maxSurge: 1
+
+      # Number of unavailable pods during deployment
+      maxUnavailable: 0
+
+  # Deployment selector
+  selector:
+
+    matchLabels:
+      app: user-service
+
+  # Pod template
+  template:
+
+    metadata:
+
+      labels:
+        app: user-service
+
+    spec:
+
+      containers:
+
+        - name: user-service
+
+          # Jenkins updates this tag every deployment
+          image: registry.disapp.net:5000/user-service:1
+
+          # Always pull latest image from registry
+          imagePullPolicy: Always
+
+          ports:
+
+            # Spring Boot container port
+            - containerPort: 8080
+
+          resources:
+
+            requests:
+
+              # Minimum resources guaranteed
+              memory: "512Mi"
+              cpu: "250m"
+
+            limits:
+
+              # Maximum resources allowed
+              memory: "1Gi"
+              cpu: "1000m"
+
+          env:
+
+            # Spring profile
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+
+            # JVM tuning
+            - name: JAVA_OPTS
+              value: "-Xms256m -Xmx768m"
+
+          livenessProbe:
+
+            # Health check endpoint
+            httpGet:
+
+              path: /actuator/health
+              port: 8080
+
+            initialDelaySeconds: 60
+            periodSeconds: 30
+
+          readinessProbe:
+
+            httpGet:
+
+              path: /actuator/health
+              port: 8080
+
+            initialDelaySeconds: 30
+            periodSeconds: 15

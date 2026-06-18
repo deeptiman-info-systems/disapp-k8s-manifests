@@ -1,0 +1,87 @@
+#############################################
+# IntelliJ IDEA
+#############################################
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+#############################################
+# Gradle
+#############################################
+.gradle/
+build/
+
+# Ignore Gradle cache
+gradle-app.setting
+
+# Ignore local Gradle config
+gradle.properties
+
+#############################################
+# Java
+#############################################
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+#############################################
+# Spring Boot
+#############################################
+logs/
+*.log
+spring.log
+
+#############################################
+# Application Config (Optional)
+#############################################
+# Uncomment if you don't want to commit local configs
+
+# src/main/resources/application.properties
+# src/main/resources/application.yml
+# src/main/resources/application-dev.yml
+# src/main/resources/application-local.yml
+
+#############################################
+# OS Files
+#############################################
+.DS_Store
+Thumbs.db
+
+#############################################
+# Maven (if mixed project)
+#############################################
+target/
+
+#############################################
+# VS Code (Optional)
+#############################################
+.vscode/
+
+#############################################
+# Eclipse (Optional)
+#############################################
+.project
+.classpath
+.settings/
+
+#############################################
+# NetBeans (Optional)
+#############################################
+nbproject/private/
+build/
+dist/
+
+#############################################
+# Temporary Files
+#############################################
+*.tmp
+*.swp
+*.swo
+*~

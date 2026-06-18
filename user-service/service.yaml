@@ -1,0 +1,33 @@
+# API version
+apiVersion: v1
+
+# Kubernetes Service
+kind: Service
+
+metadata:
+
+  name: user-service
+
+  namespace: apps
+
+spec:
+
+  selector:
+
+    # Route traffic to pods having this label
+    app: user-service
+
+  ports:
+
+    - name: http
+
+      # Service port
+      port: 80
+
+      # Container port
+      targetPort: 8080
+
+      protocol: TCP
+
+  # Internal cluster access only
+  type: ClusterIP
