@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: user-service=registry.disapp.net:5000/user-service
+    argocd-image-updater.argoproj.io/image-list: user-service=registry.disapp.net:5000/user-service:latest
     argocd-image-updater.argoproj.io/update-strategy: newest-build
     argocd-image-updater.argoproj.io/write-back-method: git
-    argocd-image-updater.argoproj.io/allow-tags: regexp:^[0-9]+$
+    argocd-image-updater.argoproj.io/force-update: "true"
 
 spec:
   replicas: 2
