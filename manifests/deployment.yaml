@@ -5,14 +5,17 @@ metadata:
   namespace: apps
 
   annotations:
-    # 👇 Tell Image Updater which image to watch
+    # 👇 Image Updater watches this image
     argocd-image-updater.argoproj.io/image-list: user-service=registry.disapp.net:5000/user-service
 
-    # 👇 Automatically pick newest version
-    argocd-image-updater.argoproj.io/update-strategy: semver
+    # 👇 IMPORTANT FIX: use newest-build instead of semver
+    argocd-image-updater.argoproj.io/update-strategy: newest-build
 
-    # 👇 Write back updated image to Git
+    # 👇 Allow Image Updater to update Git automatically
     argocd-image-updater.argoproj.io/write-back-method: git
+
+    # (OPTIONAL but recommended) always consider tags as numbers
+    argocd-image-updater.argoproj.io/allow-tags: regexp:^[0-9]+$
 
 spec:
   replicas: 2
@@ -30,7 +33,7 @@ spec:
       containers:
         - name: user-service
 
-          # ⚠️ INITIAL VERSION ONLY (will be auto-updated later)
+          # 👇 DO NOT pin version (Image Updater will update this)
           image: registry.disapp.net:5000/user-service
 
           imagePullPolicy: Always
