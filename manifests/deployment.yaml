@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: registry.disapp.net:5000/user-service:1   # 👈 MUST have a real tag initially
+          image: registry.disapp.net:5000/user-service:latest   # 👈 MUST have a real tag initially
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
