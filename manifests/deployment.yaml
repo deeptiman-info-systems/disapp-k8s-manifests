@@ -53,7 +53,7 @@ spec:
         - name: user-service
 
           # Jenkins updates this tag every deployment
-          image: registry.disapp.net:5000/user-service:latest
+          image: registry.disapp.net:5000/user-service:6
 
           # Always pull latest image from registry
           imagePullPolicy: Always
