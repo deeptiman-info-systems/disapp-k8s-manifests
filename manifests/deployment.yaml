@@ -1,20 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
-  namespace: apps
-
   annotations:
-    # 👇 Image Updater watches this image
     argocd-image-updater.argoproj.io/image-list: user-service=registry.disapp.net:5000/user-service
-
-    # 👇 IMPORTANT FIX: use newest-build instead of semver
     argocd-image-updater.argoproj.io/update-strategy: newest-build
-
-    # 👇 Allow Image Updater to update Git automatically
     argocd-image-updater.argoproj.io/write-back-method: git
-
-    # (OPTIONAL but recommended) always consider tags as numbers
     argocd-image-updater.argoproj.io/allow-tags: regexp:^[0-9]+$
 
 spec:
